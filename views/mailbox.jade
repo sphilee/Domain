@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta(charset='UTF-8')
-    title AdminLTE | Dashboard
+    title AdminLTE | Mailbox
     meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
     // bootstrap 3.0.2
     link(href='css/bootstrap.min.css', rel='stylesheet', type='text/css')
@@ -30,7 +30,7 @@ html
   body.skin-black
     // header logo: style can be found in header.less
     header.header
-      a.logo(href='index')
+      a.logo(href='/index')
         // Add the class icon to your logo image or logo icon to add the margining
         | AdminLTE
       // Header Navbar: style can be found in header.less
@@ -57,7 +57,7 @@ html
                       // start message
                       a(href='#')
                         .pull-left
-                          img.img-circle(src='img/avatar3.png', alt='User Image')
+                          img.img-circle(src='../img/avatar3.png', alt='User Image')
                         h4
                           | Support Team
                           small
@@ -68,7 +68,7 @@ html
                     li
                       a(href='#')
                         .pull-left
-                          img.img-circle(src='img/avatar2.png', alt='user image')
+                          img.img-circle(src='../img/avatar2.png', alt='user image')
                         h4
                           | AdminLTE Design Team
                           small
@@ -78,7 +78,7 @@ html
                     li
                       a(href='#')
                         .pull-left
-                          img.img-circle(src='img/avatar.png', alt='user image')
+                          img.img-circle(src='../img/avatar.png', alt='user image')
                         h4
                           | Developers
                           small
@@ -88,7 +88,7 @@ html
                     li
                       a(href='#')
                         .pull-left
-                          img.img-circle(src='img/avatar2.png', alt='user image')
+                          img.img-circle(src='../img/avatar2.png', alt='user image')
                         h4
                           | Sales Department
                           small
@@ -98,7 +98,7 @@ html
                     li
                       a(href='#')
                         .pull-left
-                          img.img-circle(src='img/avatar.png', alt='user image')
+                          img.img-circle(src='../img/avatar.png', alt='user image')
                         h4
                           | Reviewers
                           small
@@ -201,7 +201,7 @@ html
               ul.dropdown-menu
                 // User image
                 li.user-header.bg-light-blue
-                  img.img-circle(src='img/avatar3.png', alt='User Image')
+                  img.img-circle(src='../img/avatar3.png', alt='User Image')
                   p
                     | #{user.username} - Web Developer
                     small Member since Nov. 2012
@@ -218,7 +218,7 @@ html
                   .pull-left
                     a.btn.btn-default.btn-flat(href='#') Profile
                   .pull-right
-                    a.btn.btn-default.btn-flat(href='/logout') Sign out
+                    a.btn.btn-default.btn-flat(href='#') Sign out
     .wrapper.row-offcanvas.row-offcanvas-left
       // Left side column. contains the logo and sidebar
       aside.left-side.sidebar-offcanvas
@@ -227,10 +227,10 @@ html
           // Sidebar user panel
           .user-panel
             .pull-left.image
-              img.img-circle(src='img/avatar3.png', alt='User Image')
+              img.img-circle(src='../img/avatar3.png', alt='User Image')
             .pull-left.info
               p Hello, #{user.username}
-            a(href='#')
+              a(href='#')
                 i.fa.fa-circle.text-success
                 |  Online
           // search form
@@ -289,7 +289,7 @@ html
                     i.fa.fa-angle-double-right
                     |  Editors
             li
-              a(href='mailbox')
+              a(href='/mailbox')
                 i.fa.fa-envelope
                 span Send complaint
                 small.badge.pull-right.bg-yellow 12
@@ -297,32 +297,259 @@ html
       // Right side column. Contains the navbar and content of the page
       aside.right-side
         // Content Header (Page header)
-        section.content-header
-          h1
-            | Blank page
-            small Control panel
-          ol.breadcrumb
-            li
-              a(href='#')
-                i.fa.fa-dashboard
-                |  Home
-            li.active Blank page
-          .service-item(style='text-align:center;')
-            span.fa-stack.fa-4x
-              i.fa.fa-circle.fa-stack-2x
-              i.fa.fa-home.fa-stack-1x.text-primary
-           if(typeof(user.personalData) !== 'undefined')
-            h4(style='text-align:center;')
-              strong My Seat : #{user.personalData.seat}
-            h4(style='text-align:center;')
-              strong Start Time : #{user.personalData.start}
-            h4(style='text-align:center;')
-              strong End Time : #{user.personalData.end}
+        section.content-header.no-margin
+          h1.text-center
+            | Mailbox
         // Main content
         section.content
+          // MAILBOX BEGIN
+          .mailbox.row
+            .col-xs-12
+              .box.box-solid
+                .box-body
+                  .row
+                    .col-md-3.col-sm-4
+                      //
+                        BOXES are complex enough to move the .box-header around.
+                        This is an example of having the box header within the box body
+                      .box-header
+                        i.fa.fa-inbox
+                        h3.box-title INBOX
+                      // compose message btn
+                      a.btn.btn-block.btn-primary(data-toggle='modal', data-target='#compose-modal')
+                        i.fa.fa-pencil
+                        |  Compose Message
+                      // Navigation - folders
+                      div(style='margin-top: 15px;')
+                        ul.nav.nav-pills.nav-stacked
+                          li.header Folders
+                          li.active
+                            a(href='#')
+                              i.fa.fa-inbox
+                              |  Inbox (14)
+                          li
+                            a(href='#')
+                              i.fa.fa-pencil-square-o
+                              |  Drafts
+                          li
+                            a(href='#')
+                              i.fa.fa-mail-forward
+                              |  Sent
+                          li
+                            a(href='#')
+                              i.fa.fa-star
+                              |  Starred
+                          li
+                            a(href='#')
+                              i.fa.fa-folder
+                              |  Junk
+                    // /.col (LEFT)
+                    .col-md-9.col-sm-8
+                      .row.pad
+                        .col-sm-6
+                          label(style='margin-right: 10px;')
+                            input#check-all(type='checkbox')
+                          // Action button
+                          .btn-group
+                            button.btn.btn-default.btn-sm.btn-flat.dropdown-toggle(type='button', data-toggle='dropdown')
+                              | Action 
+                              span.caret
+                            ul.dropdown-menu(role='menu')
+                              li
+                                a(href='#') Mark as read
+                              li
+                                a(href='#') Mark as unread
+                              li.divider
+                              li
+                                a(href='#') Move to junk
+                              li.divider
+                              li
+                                a(href='#') Delete
+                        .col-sm-6.search-form
+                          form.text-right(action='#')
+                            .input-group
+                              input.form-control.input-sm(type='text', placeholder='Search')
+                              .input-group-btn
+                                button.btn.btn-sm.btn-primary(type='submit', name='q')
+                                  i.fa.fa-search
+                      // /.row
+                      .table-responsive
+                        // THE MESSAGES
+                        table.table.table-mailbox
+                          tr.unread
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr.unread
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr.unread
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr.unread
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                          tr
+                            td.small-col
+                              input(type='checkbox')
+                            td.small-col
+                              i.fa.fa-star-o
+                            td.name
+                              a(href='#') John Doe
+                            td.subject
+                              a(href='#') Urgent! Please read
+                            td.time 12:30 PM
+                      // /.table-responsive
+                    // /.col (RIGHT)
+                  // /.row
+                // /.box-body
+                .box-footer.clearfix
+                  .pull-right
+                    small Showing 1-12/1,240
+                    button.btn.btn-xs.btn-primary
+                      i.fa.fa-caret-left
+                    button.btn.btn-xs.btn-primary
+                      i.fa.fa-caret-right
+                // box-footer
+              // /.box
+            // /.col (MAIN)
+          // MAILBOX END
         // /.content
       // /.right-side
     // ./wrapper
+    // COMPOSE MESSAGE MODAL
+    #compose-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title
+              i.fa.fa-envelope-o
+              |  Compose New Message
+          form(action='#', method='post')
+            .modal-body
+              .form-group
+                .input-group
+                  span.input-group-addon TO:
+                  input.form-control(name='email_to', type='email', value='manager@ajou.ac.kr', placeholder='Email TO')
+              .Type
+                .form-group
+                  label Select
+                  select.form-control(name='Type')
+                    option smoking
+                    option noise
+                    option food
+                    option temperature
+                    option broken
+              .form-group
+                .input-group
+                  span.input-group-addon Title:
+                  input.form-control(name='Title', type='text', placeholder='Title')
+              .form-group
+                textarea#email_message.form-control(name='message', placeholder='Message', style='height: 120px;')
+              .form-group
+                .btn.btn-success.btn-file
+                  i.fa.fa-paperclip
+                  |  Attachment
+                  input(type='file', name='attachment')
+                p.help-block Max. 32MB
+            .modal-footer.clearfix
+              button.btn.btn-danger(type='button', data-dismiss='modal')
+                i.fa.fa-times
+                |  Discard
+              button.btn.btn-primary.pull-left(type='submit')
+                i.fa.fa-envelope
+                |  Send Message
+        // /.modal-content
+      // /.modal-dialog
+    // /.modal
     // jQuery 2.0.2
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
     // jQuery UI 1.10.3
@@ -351,4 +578,42 @@ html
     script(src='js/AdminLTE/app.js', type='text/javascript')
     // AdminLTE dashboard demo (This is only for demo purposes)
     script(src='js/AdminLTE/dashboard.js', type='text/javascript')
+    // Page script
+    script(type='text/javascript').
+      $(function() {
+      "use strict";
+      //iCheck for checkbox and radio inputs
+      $('input[type="checkbox"]').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+      });
+      //When unchecking the checkbox
+      $("#check-all").on('ifUnchecked', function(event) {
+      //Uncheck all checkboxes
+      $("input[type='checkbox']", ".table-mailbox").iCheck("uncheck");
+      });
+      //When checking the checkbox
+      $("#check-all").on('ifChecked', function(event) {
+      //Check all checkboxes
+      $("input[type='checkbox']", ".table-mailbox").iCheck("check");
+      });
+      //Handle starring for glyphicon and font awesome
+      $(".fa-star, .fa-star-o, .glyphicon-star, .glyphicon-star-empty").click(function(e) {
+      e.preventDefault();
+      //detect type
+      var glyph = $(this).hasClass("glyphicon");
+      var fa = $(this).hasClass("fa");
+      //Switch states
+      if (glyph) {
+      $(this).toggleClass("glyphicon-star");
+      $(this).toggleClass("glyphicon-star-empty");
+      }
+      if (fa) {
+      $(this).toggleClass("fa-star");
+      $(this).toggleClass("fa-star-o");
+      }
+      });
+      //Initialize WYSIHTML5 - text editor
+      $("#email_message").wysihtml5();
+      });
 

@@ -7,6 +7,9 @@ html
     title jQuery Seat Charts Plugin Demo
     link(href='http://www.jqueryscript.net/css/jquerysctipttop.css', rel='stylesheet', type='text/css')
     link(rel='stylesheet', type='text/css', href='jquery.seat-charts.css')
+    link(rel='stylesheet', href='kendo.common-material.min.css')
+    link(rel='stylesheet', href='kendo.material.min.css')
+    link(rel='stylesheet', href='kendo.material.mobile.min.css')
     style.
       body {
       font-family: 'Roboto', sans-serif;
@@ -120,17 +123,24 @@ html
             | Selected Seats (
             span#counter 0
             | ):
-          form#form1(action='/GetSeat', method='get')
-            ul#selected-seats
-          button(type='summit', form='nameform', value='Select') Select »
-          #legend
+          ul#selected-seats
+          form(action='/GetSeat', method='post')
+            h4 Start time
+            input#start(name='start')
+            h4(style='margin-top: 2em;') End time
+            input#end(name='end')
+            input#demo(hidden='', type='text', name='seat')
+            button.checkout-button(value='Select') Select »
         p(style='text-align:center;')
           button(onclick='goBack()') Close
+        p#legend
     br
-    script(src='http://code.jquery.com/jquery-1.12.4.min.js')
+    script(src='jquery.min.js')
+    script(src='kendo.all.min.js')
     script(src='jquery.seat-charts.js')
     script.
       var firstSeatLabel = 1;
+      var selectseat;
       function goBack() {
       window.history.back();
       }
@@ -177,12 +187,15 @@ html
       ]
       },
       click: function () {
-      if (this.status() == 'available') {
+      if (this.status() == 'available' && sc.find('selected').length <1) {
       //let's create a new <li> which we'll add to the cart items
       $('<li> Seat # '+this.settings.label+' <a href="#" class="cancel-cart-item">[cancel]</a></li>')
       .attr('id', 'cart-item-'+this.settings.id)
       .data('seatId', this.settings.id)
       .appendTo($cart);
+      selectseat= this.settings.label;
+      document.getElementById("demo").value = selectseat;
+      document.getElementById("demo").select();
       /*
       * Lets update the counter and total
       *
@@ -216,6 +229,31 @@ html
       });
       //let's pretend some seats have already been booked
       sc.get(['1_2', '4_1', '7_1', '7_2']).status('unavailable');
+      function startChange() {
+      var startTime = start.value();
+      if (startTime) {
+      startTime = new Date(startTime);
+      end.max(startTime);
+      startTime.setMinutes(startTime.getMinutes() + this.options.interval);
+      end.min(startTime);
+      end.value(startTime);
+      }
+      }
+      //init start timepicker
+      var start = $("#start").kendoTimePicker({
+      change: startChange
+      }).data("kendoTimePicker");
+      var currenttime = new Date().toLocaleTimeString('en-GB', { hour: "numeric",minute: "numeric"});
+      //init end timepicker
+      var end = $("#end").kendoTimePicker().data("kendoTimePicker");
+      document.getElementById("start").value = currenttime+" PM";
+      document.getElementById("end").value = currenttime+" PM";
+      //define min/max range
+      start.min(currenttime+" PM");
+      start.max(currenttime+" PM");
+      //define min/max range
+      end.min(currenttime+" PM");
+      end.max(currenttime+" PM");
       });
       function recalculateTotal(sc) {
       var total = 0;
