@@ -6,10 +6,10 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title jQuery Seat Charts Plugin Demo
     link(href='http://www.jqueryscript.net/css/jquerysctipttop.css', rel='stylesheet', type='text/css')
-    link(rel='stylesheet', type='text/css', href='jquery.seat-charts.css')
-    link(rel='stylesheet', href='kendo.common-material.min.css')
-    link(rel='stylesheet', href='kendo.material.min.css')
-    link(rel='stylesheet', href='kendo.material.mobile.min.css')
+    link(rel='stylesheet', type='text/css', href='/map/jquery.seat-charts.css')
+    link(rel='stylesheet', href='/map/kendo.common-material.min.css')
+    link(rel='stylesheet', href='/map/kendo.material.min.css')
+    link(rel='stylesheet', href='/map/kendo.material.mobile.min.css')
     style.
       body {
       font-family: 'Roboto', sans-serif;
@@ -115,7 +115,7 @@ html
     #jquery-script-menu
     .wrapper
       .container
-        h1 Get Seat
+        h1  Get Seat
         #seat-map
         .booking-details
           h2 Details
@@ -126,18 +126,19 @@ html
           ul#selected-seats
           form(action='/GetSeat', method='post')
             h4 Start time
-            input#start(name='start')
+            p#start1(name='start1')
             h4(style='margin-top: 2em;') End time
             input#end(name='end')
+            input#start(hidden='', name='start')
             input#demo(hidden='', type='text', name='seat')
             button.checkout-button(value='Select') Select »
         p(style='text-align:center;')
           button(onclick='goBack()') Close
         p#legend
     br
-    script(src='jquery.min.js')
-    script(src='kendo.all.min.js')
-    script(src='jquery.seat-charts.js')
+    script(src='/map/jquery.min.js')
+    script(src='/map/kendo.all.min.js')
+    script(src='/map/jquery.seat-charts.js')
     script.
       var firstSeatLabel = 1;
       var selectseat;
@@ -240,20 +241,40 @@ html
       }
       }
       //init start timepicker
-      var start = $("#start").kendoTimePicker({
-      change: startChange
-      }).data("kendoTimePicker");
       var currenttime = new Date().toLocaleTimeString('en-GB', { hour: "numeric",minute: "numeric"});
       //init end timepicker
       var end = $("#end").kendoTimePicker().data("kendoTimePicker");
-      document.getElementById("start").value = currenttime+" PM";
-      document.getElementById("end").value = currenttime+" PM";
+      var toggle;
+      if (new Date().getHours()>12)
+      {
+      var cn = (new Date().getHours()-12).toString();
+      toggle=" PM";
+      }
+      else
+      {
+      var cn = new Date().getHours().toString();
+      toggle=" AM";
+      }
+      console.log(cn);
+      var k = (new Date().getMinutes()).toString();
+      var curtime = cn + ":"+k;
+      document.getElementById("start1").innerHTML = curtime+toggle;
+      document.getElementById("start").value = curtime+toggle;
+      document.getElementById("end").value = curtime+toggle;
       //define min/max range
-      start.min(currenttime+" PM");
-      start.max(currenttime+" PM");
-      //define min/max range
-      end.min(currenttime+" PM");
-      end.max(currenttime+" PM");
+      end.min(curtime+toggle);
+      if(new Date().getHours<8)
+      {
+      toggle=" AM"
+      var n = (new Date().getHours()+4).toString();
+      }
+      else
+      {
+      toggle=" PM"
+      var n = (new Date().getHours()-8).toString();
+      }
+      var endtime = n + ":"+k;
+      end.max(endtime+toggle);
       });
       function recalculateTotal(sc) {
       var total = 0;

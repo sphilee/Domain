@@ -230,7 +230,7 @@ html
               img.img-circle(src='img/avatar3.png', alt='User Image')
             .pull-left.info
               p Hello, #{user.username}
-            a(href='#')
+              a(href='#')
                 i.fa.fa-circle.text-success
                 |  Online
           // search form
@@ -248,7 +248,7 @@ html
                 i.fa.fa-dashboard
                 span Get Seat
             li
-              a(href='pages/widgets.html')
+              a(href='#')
                 i.fa.fa-th
                 span Lend Seat
                 small.badge.pull-right.bg-green new
@@ -259,15 +259,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/charts/morris.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Morris
                 li
-                  a(href='pages/charts/flot.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Flot
                 li
-                  a(href='pages/charts/inline.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Inline charts
             li.treeview
@@ -277,15 +277,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/forms/general.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  General Elements
                 li
-                  a(href='pages/forms/advanced.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Advanced Elements
                 li
-                  a(href='pages/forms/editors.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Editors
             li
@@ -299,19 +299,21 @@ html
         // Content Header (Page header)
         section.content-header
           h1
-            | Blank page
+            | Home page
             small Control panel
           ol.breadcrumb
             li
               a(href='#')
                 i.fa.fa-dashboard
                 |  Home
-            li.active Blank page
+            li.active Home page
           .service-item(style='text-align:center;')
             span.fa-stack.fa-4x
               i.fa.fa-circle.fa-stack-2x
               i.fa.fa-home.fa-stack-1x.text-primary
            if(typeof(user.personalData) !== 'undefined')
+            h4(style='text-align:center;')
+              strong My Floor : #{user.personalData.floor}
             h4(style='text-align:center;')
               strong My Seat : #{user.personalData.seat}
             h4(style='text-align:center;')

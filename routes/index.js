@@ -2,13 +2,13 @@ const express = require('express');
 const passport = require('passport');
 const Account = require('../models/account');
 const router = express.Router();
-var Seat = require('../seat.js');
 var db = require('../db.js');
 var path = require('path');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 router.get('/', (req, res) => {
     res.render('login');
 });
-
 router.get('/register', (req, res) => {
     res.render('register',{});
 });
@@ -18,26 +18,49 @@ router.get('/GetSeat', (req, res) => {
 router.get('/map', (req,res) => {
     res.render('map',{user: req.user});
 });
+router.post('/map',(req,res) => {
+    var floor = req.body.floor;
+    var personalData = {floor:floor};
+    var newData = {query,personalData};
+    var query = {'username':req.user.username};
+	Account.findOneAndUpdate(query,newData,{upsert:true}, function(err,docs){
+        res.render("map",{user:docs});   
+	console.log(docs);
+	});
+});
 router.get('/mailbox', (req,res) => {
     res.render('mailbox',{user:req.user});
+});
+router.post('/mailbox', (req,res) => {
+var transporter = nodemailer.createTransport('smtps://gwanhyung787%40gmail.com:gkawjd59@smtp.gmail.com');
+    var mailOptions = {
+	from : "gwanhyung787@gmail.com",
+	to : req.body.email_to,
+	subject : req.body.Type+req.body.Title,
+	text : req.body.message
+	};
+transporter.sendMail(mailOptions, function (err, info) {
+	if(err){
+	return console.log(err);
+	}
+	else {
+	console.log("Message sent: " + info.response);
+	}
+	transporter.close();
+	});
+    res.redirect('mailbox');
 });
 router.post('/GetSeat', (req,res) => {
 	var start = req.body.start;
 	var end = req.body.end;
 	var seat = req.body.seat;
+	var floor = req.user.personalData.floor;
 	var query = {'username':req.user.username};
-	var personalData = {start:start,end: end,seat: seat};
-	var newData = {query,personalData}
-/*
-    Seat.insert({seat : seat,start: start,end:end}, (err,seat) => {
-	if (err) {
-	return res.render('/GetSeat', {error : err.message});
-	}
-	res.redirect('/GetSeat');
-	});
-*/
-	Account.findOneAndUpdate(query,newData, function(err,docs){
-	res.render("GetSeat",{user:req.user});
+	var personalData = {start:start,end: end,seat: seat,floor:floor};
+	var newData = {query,personalData};
+
+	Account.findOneAndUpdate(query,newData,{upsert:true}, function(err,docs){
+	res.render("GetSeat",{user:docs});
 	console.log(docs);
 	});
 });

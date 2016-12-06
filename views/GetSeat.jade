@@ -248,7 +248,7 @@ html
                 i.fa.fa-dashboard
                 span Get Seat
             li
-              a(href='pages/widgets.html')
+              a(href='#')
                 i.fa.fa-th
                 span Lend Seat
                 small.badge.pull-right.bg-green new
@@ -259,15 +259,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/charts/morris.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Morris
                 li
-                  a(href='pages/charts/flot.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Flot
                 li
-                  a(href='pages/charts/inline.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Inline charts
             li.treeview
@@ -277,15 +277,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/forms/general.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  General Elements
                 li
-                  a(href='pages/forms/advanced.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Advanced Elements
                 li
-                  a(href='pages/forms/editors.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Editors
             li
@@ -315,33 +315,45 @@ html
                 span.fa-stack.fa-4x
                   i.fa.fa-circle.fa-stack-2x
                   i.fa.fa-book.fa-stack-1x.text-primary
-                h4
-                  strong 1 Floor
-                a.btn.btn-light(href='/map', data-toggle='modal') Learn More
+                form(action='/map', method='post')
+                  h4
+                    strong
+                      input(hidden='', type='text', name='floor', value='1')
+                      | 1 Floor
+                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
             .col-md-3.col-sm-6
               .service-item(style='text-align:center;')
                 span.fa-stack.fa-4x
                   i.fa.fa-circle.fa-stack-2x
                   i.fa.fa-book.fa-stack-1x.text-primary
-                h4
-                  strong 2 Floor
-                a.btn.btn-light(href='/map', data-toggle='modal') Learn More
+                form(action='/map', method='post')
+                  h4
+                    strong
+                      input(hidden='', type='text', name='floor', value='2')
+                      | 2 Floor
+                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
             .col-md-3.col-sm-6
               .service-item(style='text-align:center;')
                 span.fa-stack.fa-4x
                   i.fa.fa-circle.fa-stack-2x
                   i.fa.fa-book.fa-stack-1x.text-primary
-                h4
-                  strong 3 Floor
-                a.btn.btn-light(href='/map', data-toggle='modal') Learn More
+                form(action='/map', method='post')
+                  h4
+                    strong
+                      input(hidden='', type='text', name='floor', value='3')
+                      | 3 Floor
+                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
             .col-md-3.col-sm-6
               .service-item(style='text-align:center;')
                 span.fa-stack.fa-4x
                   i.fa.fa-circle.fa-stack-2x
                   i.fa.fa-book.fa-stack-1x.text-primary
-                h4
-                  strong 4 Floor
-                a.btn.btn-light(href='/map', data-toggle='modal') Learn More
+                form(action='/map', method='post')
+                  h4
+                    strong
+                      input(hidden='', type='text', name='floor', value='4')
+                      | 4 Floor
+                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
         // Main content
         section.content
         // /.content

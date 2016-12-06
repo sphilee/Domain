@@ -248,7 +248,7 @@ html
                 i.fa.fa-dashboard
                 span Get Seat
             li
-              a(href='pages/widgets.html')
+              a(href='#')
                 i.fa.fa-th
                 span Lend Seat
                 small.badge.pull-right.bg-green new
@@ -259,15 +259,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/charts/morris.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Morris
                 li
-                  a(href='pages/charts/flot.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Flot
                 li
-                  a(href='pages/charts/inline.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Inline charts
             li.treeview
@@ -277,15 +277,15 @@ html
                 i.fa.fa-angle-left.pull-right
               ul.treeview-menu
                 li
-                  a(href='pages/forms/general.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  General Elements
                 li
-                  a(href='pages/forms/advanced.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Advanced Elements
                 li
-                  a(href='pages/forms/editors.html')
+                  a(href='#')
                     i.fa.fa-angle-double-right
                     |  Editors
             li
@@ -513,7 +513,7 @@ html
             h4.modal-title
               i.fa.fa-envelope-o
               |  Compose New Message
-          form(action='#', method='post')
+          form(action='/mailbox', method='post')
             .modal-body
               .form-group
                 .input-group
@@ -523,11 +523,11 @@ html
                 .form-group
                   label Select
                   select.form-control(name='Type')
-                    option smoking
-                    option noise
-                    option food
-                    option temperature
-                    option broken
+                    option(value='[smoking]') smoking
+                    option(value='[noise]') noise
+                    option(value='[food]') food
+                    option(value='[temperature]') temperature
+                    option(value='[broken]') broken
               .form-group
                 .input-group
                   span.input-group-addon Title:
