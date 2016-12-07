@@ -28,7 +28,7 @@ html
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
       script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
   body.skin-black
-    /der logo: style can be found in header.less
+    // header logo: style can be found in header.less
     header.header
       a.logo(href='index')
         // Add the class icon to your logo image or logo icon to add the margining
@@ -299,61 +299,27 @@ html
         // Content Header (Page header)
         section.content-header
           h1
-            | GetSeat page
+            | Home page
             small Control panel
           ol.breadcrumb
             li
               a(href='#')
                 i.fa.fa-dashboard
                 |  Home
-            li.active Get Seat
-          h2 Our Services
-          hr.small
-          .row
-            .col-md-3.col-sm-6
-              .service-item(style='text-align:center;')
-                span.fa-stack.fa-4x
-                  i.fa.fa-circle.fa-stack-2x
-                  i.fa.fa-book.fa-stack-1x.text-primary
-                form(action='/map', method='post')
-                  h4
-                    strong
-                      input(hidden='', type='text', name='floor', value='1')
-                      | 1 Floor
-                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
-            .col-md-3.col-sm-6
-              .service-item(style='text-align:center;')
-                span.fa-stack.fa-4x
-                  i.fa.fa-circle.fa-stack-2x
-                  i.fa.fa-book.fa-stack-1x.text-primary
-                form(action='/map', method='post')
-                  h4
-                    strong
-                      input(hidden='', type='text', name='floor', value='2')
-                      | 2 Floor
-                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
-            .col-md-3.col-sm-6
-              .service-item(style='text-align:center;')
-                span.fa-stack.fa-4x
-                  i.fa.fa-circle.fa-stack-2x
-                  i.fa.fa-book.fa-stack-1x.text-primary
-                form(action='/map', method='post')
-                  h4
-                    strong
-                      input(hidden='', type='text', name='floor', value='3')
-                      | 3 Floor
-                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
-            .col-md-3.col-sm-6
-              .service-item(style='text-align:center;')
-                span.fa-stack.fa-4x
-                  i.fa.fa-circle.fa-stack-2x
-                  i.fa.fa-book.fa-stack-1x.text-primary
-                form(action='/map', method='post')
-                  h4
-                    strong
-                      input(hidden='', type='text', name='floor', value='4')
-                      | 4 Floor
-                  input#frm1_submit.btn.btn-light(type='submit', value='Learn More')
+            li.active Home page
+          .service-item(style='text-align:center;')
+            span.fa-stack.fa-4x
+              i.fa.fa-circle.fa-stack-2x
+              i.fa.fa-home.fa-stack-1x.text-primary
+           if(typeof(user.personalData) !== 'undefined')
+            h4(style='text-align:center;')
+              strong My Floor : #{user.personalData.floor}
+            h4(style='text-align:center;')
+              strong My Seat : #{user.personalData.seat}
+            h4(style='text-align:center;')
+              strong Start Time : #{user.personalData.start}
+            h4(style='text-align:center;')
+              strong End Time : #{user.personalData.end}
         // Main content
         section.content
         // /.content
@@ -387,4 +353,6 @@ html
     script(src='js/AdminLTE/app.js', type='text/javascript')
     // AdminLTE dashboard demo (This is only for demo purposes)
     script(src='js/AdminLTE/dashboard.js', type='text/javascript')
+
+
 

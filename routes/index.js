@@ -28,6 +28,9 @@ router.post('/map',(req,res) => {
 	console.log(docs);
 	});
 });
+router.get('/assign',(req,res) => {
+    res.render('assign',{user: req.user});
+});
 router.get('/mailbox', (req,res) => {
     res.render('mailbox',{user:req.user});
 });
