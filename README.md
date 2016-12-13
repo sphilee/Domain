@@ -4,4 +4,7 @@ What is this?
   SMS is Smart library Management System
 
 Get Started
-  1. node bin/www
+  node bin/www
+
+Server IP?
+  35.162.178.8:8080
