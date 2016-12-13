@@ -3,7 +3,7 @@
 What is this?
   SMS is Smart library Management System
 
-Get Started
+Get Started?
   node bin/www
 
 Server IP?
