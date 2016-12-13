@@ -261,33 +261,15 @@ html
                 li
                   a(href='assign')
                     i.fa.fa-angle-double-right
-                    |  Assign
+                    |  Assign State
                 li
                   a(href='#')
                     i.fa.fa-angle-double-right
-                    |  Flot
-                li
-                  a(href='#')
-                    i.fa.fa-angle-double-right
-                    |  Inline charts
-            li.treeview
-              a(href='#')
+                    |  Reserve State
+            li
+              a(href='reserve')
                 i.fa.fa-edit
                 span Reserve Facility
-                i.fa.fa-angle-left.pull-right
-              ul.treeview-menu
-                li
-                  a(href='#')
-                    i.fa.fa-angle-double-right
-                    |  General Elements
-                li
-                  a(href='#')
-                    i.fa.fa-angle-double-right
-                    |  Advanced Elements
-                li
-                  a(href='#')
-                    i.fa.fa-angle-double-right
-                    |  Editors
             li
               a(href='mailbox')
                 i.fa.fa-envelope
@@ -311,20 +293,53 @@ html
             span.fa-stack.fa-4x
               i.fa.fa-circle.fa-stack-2x
               i.fa.fa-home.fa-stack-1x.text-primary
-           if(typeof(user.personalData) !== 'undefined')
-            h4(style='text-align:center;')
-              strong My Floor : #{user.personalData.floor}
-            h4(style='text-align:center;')
-              strong My Seat : #{user.personalData.seat}
-            h4(style='text-align:center;')
-              strong Start Time : #{user.personalData.start}
-            h4(style='text-align:center;')
-              strong End Time : #{user.personalData.end}
+           if(typeof(user.personalData.seat) === 'string')
+             h4(style='text-align:center;')
+               strong My Floor : #{user.personalData.floor}
+             h4(style='text-align:center;')
+               strong My Seat : #{user.personalData.seat}
+             h4(style='text-align:center;')
+               strong Start Time : #{user.personalData.start}
+             h4(style='text-align:center;')
+               strong End Time : #{user.personalData.end}
+               form(action='/assign', method='post')
+                 input#frm1_submit.btn.btn-light(type='submit', value='Return Seat')
         // Main content
         section.content
         // /.content
       // /.right-side
     // ./wrapper
+    script.
+      function startTimer(duration, display) {
+      var start = Date.now(),
+      diff,
+      minutes,
+      seconds;
+      function timer() {
+      // get the number of seconds that have elapsed since
+      // startTimer() was called
+      diff = duration - (((Date.now() - start) / 1000) | 0);
+      // does the same job as parseInt truncates the float
+      minutes = (diff / 60) | 0;
+      seconds = (diff % 60) | 0;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = minutes + ":" + seconds;
+      if (diff <= 0) {
+      // add one second so that the count down starts at the full duration
+      // example 05:00 not 04:59
+      start = Date.now() + 1000;
+      }
+      };
+      // we don't want to wait a full second before the timer starts
+      timer();
+      setInterval(timer, 1000);
+      }
+      window.onload = function () {
+      var fiveMinutes = 60 * 5,
+      display = document.querySelector('#time');
+      startTimer(fiveMinutes, display);
+      };
     // jQuery 2.0.2
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
     // jQuery UI 1.10.3

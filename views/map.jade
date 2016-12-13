@@ -257,13 +257,15 @@ html
       }
       console.log(cn);
       var k = (new Date().getMinutes()).toString();
+      if(k<10)
+      k="0"+k;
       var curtime = cn + ":"+k;
       document.getElementById("start1").innerHTML = curtime+toggle;
       document.getElementById("start").value = curtime+toggle;
       document.getElementById("end").value = curtime+toggle;
       //define min/max range
       end.min(curtime+toggle);
-      if(new Date().getHours<8)
+      if(new Date().getHours()<8)
       {
       toggle=" AM"
       var n = (new Date().getHours()+4).toString();

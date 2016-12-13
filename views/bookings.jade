@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title fl-booking Demo
+    style.
+      body { background-color: #eee; min-width: 100vw; min-height: 100vh; }
+      x-div { display: block; }
+      .container { padding: 1px; margin: auto; max-width: 80%; }
+      .title { font-family: "Ubuntu", "Helvetica Neue", Helvetica,Arial,sans-serif; text-align: center; color: #1a6ba9 }
+  body
+    // Project files
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='/js/fl-booking.js')
+    // A helper function
+    script(src='/js/fake-events-creator.js')
+    h1.title Room-booking
+    .container
+      .booking-target
+    script.
+      flBooking({
+      targetEl: document.querySelector('.booking-target'),
+      autofillUser: '',
+      autofillEmail: '',
+      timezone: {
+      timezone: 'Europe/London',
+      utc_offset: 0,
+      },
+      createBooking: data => { console.log(data); return Promise.resolve(data) }, // must return a promise
+      getEvents: data => createFakeEvents(1000),
+      });
+

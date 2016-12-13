@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const Account = require('../models/account');
 const router = express.Router();
+var Seat = require('../seat.js');
 var db = require('../db.js');
 var path = require('path');
 var nodemailer = require('nodemailer');
@@ -18,6 +19,23 @@ router.get('/GetSeat', (req, res) => {
 router.get('/map', (req,res) => {
     res.render('map',{user: req.user});
 });
+router.get('/bookings', (req,res) => {
+    res.render('bookings',{user: req.user});
+});
+router.post('/bookings',(req,res) => {
+    var room = req.body.room;
+    var personalData = {room:room};
+    var newData = {query,personalData};
+    var query = {'username':req.user.username};
+        Account.findOneAndUpdate(query,newData,{upsert:true}, function(err,docs){
+        res.render("bookings",{user:docs});
+        console.log(docs);
+        });
+});
+router.get('/reserve', (req,res) => {
+    res.render('reserve',{user: req.user});
+});
+
 router.post('/map',(req,res) => {
     var floor = req.body.floor;
     var personalData = {floor:floor};
@@ -61,14 +79,31 @@ router.post('/GetSeat', (req,res) => {
 	var query = {'username':req.user.username};
 	var personalData = {start:start,end: end,seat: seat,floor:floor};
 	var newData = {query,personalData};
-
 	Account.findOneAndUpdate(query,newData,{upsert:true}, function(err,docs){
-	res.render("GetSeat",{user:docs});
+	res.redirect("/assign");
 	console.log(docs);
 	});
 });
+router.post('/assign', (req,res) => {
+	var start;
+	var end;
+	var seat=false;
+	var floor;
+        var query = {'username':req.user.username};
+        var personalData = {start,end,seat,floor};
+        var newData = {query,personalData};
+        Account.findOneAndUpdate(query,newData,{upsert:true}, function(err,docs){
+        res.redirect("/assign");
+        console.log(docs);
+        });
+});
+
 router.post('/register', (req, res, next) => {
-    Account.register(new Account({ username : req.body.username,email:req.body.email }), req.body.password, (err, account) => {
+	var start=false;
+	var end=false;
+	var seat=false;
+	var floor=false;
+    Account.register(new Account({ username : req.body.username,email:req.body.email,personalData:{start:start,end:end,seat:seat,floor:floor} }), req.body.password, (err, account) => {
         if (err) {
           return res.render('register', {error : err.message});
         }
