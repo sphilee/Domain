@@ -17,7 +17,13 @@ html(lang='en')
     h1.title Room-booking
     .container
       .booking-target
+     p(style='text-align:center;')
+     button(onclick='goBack()') Close
+     p#legend
     script.
+      function goBack() {
+      window.history.back();
+      }
       flBooking({
       targetEl: document.querySelector('.booking-target'),
       autofillUser: '',
