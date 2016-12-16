@@ -11,10 +11,10 @@ We ameliorate the existing problems in library and that would be suitable for re
          
 
 
-##Get Started?
+##Get Started
   node bin/www
 
-##Server IP?
+##Server IP
   35.162.178.8:8080
 ## Copyright and License
 
