@@ -1,10 +1,10 @@
-         SMS v1.0
+#SMS v1.0
          
-What is this?
+##What is this?
   SMS is Smart library Management System
 
-Get Started?
+##Get Started?
   node bin/www
 
-Server IP?
+##Server IP?
   35.162.178.8:8080
