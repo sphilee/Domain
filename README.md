@@ -15,7 +15,7 @@ We ameliorate the existing problems in library and that would be suitable for re
   node bin/www
 
 ##Server IP
-  35.162.178.8:8080
+  http://35.160.157.71:8080/
 ## Copyright and License
 
 Copyright 2013-2016 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/blob/gh-pages/LICENSE) license.
