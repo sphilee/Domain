@@ -12,6 +12,7 @@ We ameliorate the existing problems in library and that would be suitable for re
 
 
 ##Get Started
+  npm install
   node bin/www
 
 ##Server IP
