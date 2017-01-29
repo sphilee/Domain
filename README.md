@@ -12,8 +12,8 @@ We ameliorate the existing problems in library and that would be suitable for re
 
 
 ##Get Started
-  1.npm install
-  2.node bin/www
+  1. npm install
+  2. node bin/www
 
 ## Copyright and License
 
